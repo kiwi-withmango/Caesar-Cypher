@@ -1,0 +1,45 @@
+print('Welcome to Caesar Cypher!')
+def right(question):
+    right = False
+    while not right:
+        choice = input(f'{question}\n')
+        valid = input(f'Is {choice} the correct option? yes or no\n').lower()
+        if valid == 'yes' or valid == 'y':
+            right = True
+    return choice
+enorde = right('Would you like to encode or decode?').lower()
+text = right('please input your text').lower()
+shift = int(right('input shift number'))
+
+def encode(code, shift):
+    script = []
+    for letter in code:
+        if letter == ' ':
+            script.append(' ')
+        else:
+            shifted = ord(letter)
+            shifted += shift
+            if shifted >= 123:
+                value = shifted - 123
+                shifted = value + 97
+            script.append(chr(shifted))
+    return script
+def decode(code, shift):
+    code = code.lower()
+    script = []
+    for letter in code:
+        if letter == ' ':
+            script.append(' ')
+        else:
+            shifted = ord(letter)
+            shifted -= shift
+            if shifted <= 97:
+                value = abs(shifted - 97)
+                shifted = 123 - value
+            script.append(chr(shifted))
+    return script
+if enorde == 'encode' or enorde == 'e':
+    print(encode(text,shift))
+else: print(decode(text,shift))
+
+
